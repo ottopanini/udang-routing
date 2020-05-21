@@ -1,23 +1,23 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {User} from './user';
+import {UserService} from './user.service';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  styleUrls: ['./users.component.css'],
+  providers: [UserService]
 })
-export class UsersComponent {
-  users = [
-    {
-      id: 1,
-      name: 'Max'
-    },
-    {
-      id: 2,
-      name: 'Anna'
-    },
-    {
-      id: 3,
-      name: 'Chris'
-    }
-  ];
+export class UsersComponent implements OnInit {
+  users: User[] = [];
+
+  constructor(private userService: UserService) {}
+
+  ngOnInit(): void {
+    this.users = this.userService.users;
+  }
+
+  onSelectUser(index: number) {
+    this.userService.setSelectedUser(index);
+  }
 }
