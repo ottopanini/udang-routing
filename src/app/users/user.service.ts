@@ -24,8 +24,4 @@ export class UserService {
   get users() {
     return [...this._users];
   }
-
-  getById(id: number) {
-    return this._users.find(user => user.id === id);
-  }
 }
