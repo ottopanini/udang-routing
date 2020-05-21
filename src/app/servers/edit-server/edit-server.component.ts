@@ -32,7 +32,7 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
 
   constructor(private serversService: ServersService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router) {}
 
   ngOnInit() {
     console.log(this.route.snapshot.queryParams);
@@ -44,7 +44,11 @@ export class EditServerComponent implements OnInit, CanComponentDeactivate {
     this.route.fragment.subscribe();
 
     this.serversService.selectedServerChanged.subscribe(server => this.server = server);
-    this.server = this.serversService.selectedServer;
+    this.route.params.subscribe((params) => {
+      this.serversService.getServer(+params.id);
+    });
+    const selectedId = +this.route.snapshot.params.id;
+    this.server = this.serversService.getServer(selectedId);
   }
 
   onUpdateServer() {
