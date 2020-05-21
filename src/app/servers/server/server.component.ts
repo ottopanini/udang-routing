@@ -16,9 +16,12 @@ export class ServerComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.route.data.subscribe((data) => this.server = data.server);
     // the + is just only used to convert the string of the url to a number
+/*
     this.server = this.serversService.getServer(+this.route.snapshot.params.id);
     this.route.params.subscribe((params) => this.server = this.serversService.getServer(+params.id));
+*/
   }
 
   onEdit() {
