@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ServersService } from '../servers.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-edit-server',
@@ -22,9 +23,15 @@ export class EditServerComponent implements OnInit {
     return this._server;
   }
 
-  constructor(private serversService: ServersService) { }
+  constructor(private serversService: ServersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.queryParams);
+    console.log(this.route.snapshot.fragment);
+
+    this.route.queryParams.subscribe();
+    this.route.fragment.subscribe();
+
     this.serversService.selectedServerChanged.subscribe(server => this.server = server);
     this.server = this.serversService.selectedServer;
   }
