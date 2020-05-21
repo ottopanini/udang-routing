@@ -23,6 +23,6 @@ export class ServersComponent implements OnInit {
   }
 
   onReload() {
-    this.router.navigate(['servers'], {relativeTo: this.ownRoute});
+    // this.router.navigate(['servers'], {relativeTo: this.ownRoute});
   }
 }
