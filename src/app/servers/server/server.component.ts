@@ -13,7 +13,8 @@ export class ServerComponent implements OnInit {
   constructor(private serversService: ServersService) { }
 
   ngOnInit() {
-    this.server = this.serversService.getServer(1);
+    this.serversService.selectedServerChanged.subscribe((server) => this.server = server);
+    this.serversService.selectServer(0);
   }
 
 }

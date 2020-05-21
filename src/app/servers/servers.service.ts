@@ -1,3 +1,5 @@
+import {EventEmitter} from '@angular/core';
+
 export class ServersService {
   private servers = [
     {
@@ -17,17 +19,24 @@ export class ServersService {
     }
   ];
 
+  private _selectedServer: {id: number, name: string, status: string};
+
+  selectedServerChanged = new EventEmitter<{id: number, name: string, status: string}>();
+
+  get selectedServer() {
+    return this._selectedServer;
+  }
+  // server objects itself are still not defended
   getServers() {
-    return this.servers;
+    return [...this.servers];
   }
 
   getServer(id: number) {
-    const server = this.servers.find(
+    return this.servers.find(
       (s) => {
         return s.id === id;
       }
     );
-    return server;
   }
 
   updateServer(id: number, serverInfo: {name: string, status: string}) {
@@ -40,5 +49,10 @@ export class ServersService {
       server.name = serverInfo.name;
       server.status = serverInfo.status;
     }
+  }
+
+  selectServer(index: number) {
+    this._selectedServer = this.servers[index];
+    this.selectedServerChanged.emit(this._selectedServer);
   }
 }

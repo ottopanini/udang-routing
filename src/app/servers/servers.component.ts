@@ -15,4 +15,7 @@ export class ServersComponent implements OnInit {
     this.servers = this.serversService.getServers();
   }
 
+  onSelectServer(index: number) {
+    this.serversService.selectServer(index);
+  }
 }
